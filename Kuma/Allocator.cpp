@@ -24,9 +24,17 @@ namespace Kuma
     return block->data;
   }
 
-  Allocator::Unit *Allocator::AddSystemComponent(const char *name, size_t blockSize, size_t blocksPerPage)
+  void Allocator::Unit::Setup(const char *name_, size_t blockSize_, size_t blocksPerPage_)
   {
-    systemComponents[systemComponentCount] = Unit(name, blockSize, blocksPerPage);
+    name = name_;
+    blockSize = blockSize_;
+    blocksPerPage = blocksPerPage_;
+  }
+
+  Allocator::Unit *Allocator::DefineSystemComponent(const char *name, size_t blockSize, size_t blocksPerPage)
+  {
+    systemComponents[systemComponentCount].Setup(name, blockSize, blocksPerPage);
     return &systemComponents[systemComponentCount++];
   }
+
 }

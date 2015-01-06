@@ -28,10 +28,12 @@ namespace Kuma
       Page *head = nullptr;
       size_t pageCount = 0;
       size_t blocksPerPage = 0;
-      size_t blockSize;
+      size_t blockSize = 0;
       std::string name;
 
-      Unit(const char *name_, size_t blockSize_, size_t blocksPerPage_) : name(name_), blockSize(blockSize_), blocksPerPage(blocksPerPage_) {}
+      Unit() : name("__UNDEFINED__") {}
+
+      void Setup(const char *name_, size_t blockSize_, size_t blocksPerPage_);
       void *operator [](size_t index);
     };
 
@@ -40,6 +42,7 @@ namespace Kuma
     size_t systemComponentCount = 0;
 
   public:
-    Unit *AddSystemComponent(const char *name, size_t blockSize, size_t blocksPerPage);
+    Allocator() {}
+    Unit *DefineSystemComponent(const char *name, size_t blockSize, size_t blocksPerPage);
   };
 }

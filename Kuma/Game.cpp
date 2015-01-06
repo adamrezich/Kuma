@@ -3,6 +3,8 @@
 
 namespace Kuma
 {
+  Game Game::Instance;
+
   void Game::BeginSetup()
   {
 
